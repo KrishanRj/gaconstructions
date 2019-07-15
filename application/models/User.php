@@ -20,8 +20,10 @@ class User extends CI_Model
   function loginUser(){
     $email = $this->input->post('email');
     $password = sha1($this->input->post('password'));
-
-    $respond = $this->db->query("SELECT * FROM user WHERE email='$email' OR password='$password'");
+    $sql = "SELECT * FROM user WHERE email='$email' AND password='$password'";
+    // print_r($sql);
+    // exit();
+    $respond = $this->db->query($sql);
 
     if($respond->num_rows()==1){
       return $respond->row(0);
